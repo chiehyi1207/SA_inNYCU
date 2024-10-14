@@ -5,13 +5,13 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Login | THIRTEEN</title>
+    <title>Login | THIRTEEN旅遊</title>
     <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
     <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
     <link rel="stylesheet" type="text/css" href="statics/css/cake.generic.css">
     <link href="statics/css/bootstrap.min.css" rel="stylesheet">
     <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-
+    <script type="text/javascript" src="statics/js/snowstorm.js"></script>
 </head>
 <style>
     .upper-color{
@@ -32,10 +32,14 @@
 	.btn{
 		font-size: 20px;
 	}
+	.bodybg{
+		background-image: url('statics/img/Caribbean-beach.jpg')
+	}
+	
   </style>
-<body>
+<body class="bodybg">
 	<div class="d-flex upper-color flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm">
-    	<h3 class="my-0 mr-md-auto font-weight-bold"><a class="font-color" href="index.html" style="text-decoration: none">THIRTEEN</a></h3>
+    	<h3 class="my-0 mr-md-auto font-weight-bold"><a class="font-color" href="index.html" style="text-decoration: none">THIRTEEN旅遊</a></h3>
     	<nav class="my-2 my-md-0 mr-md-3">
       		<a class="p-2 text-dark" href="member.html">會員清單</a> 
       		<a class="p-2 text-dark" href="cruises.html">郵輪行程</a>
@@ -44,7 +48,7 @@
     	</nav>
     	<a class="btn cart-color btn-outline-primary" href="cart.html">購物車</a>
   	</div>
-    <div id="container">
+    <div id="container" >
         <div id="content">
             <h2>登入會員</h2>
             還未加入會員嗎？<a href="register.html">註冊會員</a>
@@ -106,7 +110,6 @@
                                         $('#flashMessage').show();
                                         
                                         if(response.message == "成功登入！"){
-                                            updateSQLTable(response.response);
                                             window.location.href='cookie.html';
                                         }
                                     },
@@ -116,28 +119,19 @@
                             });
                         }
                     }
-                    
-                    function updateSQLTable(data) {
-                        $("#sql_log > tbody").empty();
-                        var time = (data.time / 1000000).toFixed(2);
-                        var table_html = "";
-                        table_html += '<tr>';
-                        table_html += '<td>' + '1' + '</td>';
-                        table_html += '<td>' + data.sql + '</td>';
-                        table_html += '<td style="text-align: right">' + '0' + '</td>';
-                        table_html += '<td style="text-align: right">' + data.row + '</td>';
-                        table_html += '<td style="text-align: right">' + data.row + '</td>';
-                        table_html += '<td style="text-align: right">' + time + '</td>';
-                        table_html += '</tr>';
-                        $("#sql_log > tbody").append(table_html);
-                        $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
-                    }
                 });
             </script>
         </div>
 
-        <div id="footer">
-        </div>
+        <footer>
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
+    	 <p>Thank you for visiting our web site!</p>
+         <p>Contact us: <font color="blue"><a href="mailto:thirteen.with.u@gmail.com">thirteen.with.u@gmail.com</a></font> </p>
+      </div>
+  </footer>
     </div>
 </body>
 

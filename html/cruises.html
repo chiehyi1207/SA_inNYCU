@@ -7,7 +7,7 @@
   <meta name="description" content="">
  
 
-  <title>郵輪行程目錄 ｜ THIRTEEN </title>
+  <title>郵輪行程目錄 ｜ THIRTEEN旅遊 </title>
 
   <!-- Bootstrap core CSS -->
   <link href="statics/css/bootstrap.min.css" rel="stylesheet">
@@ -30,19 +30,21 @@
         font-size: 3.5rem;
       }
     }
-    
+    .bodybg{
+		background-image: url('statics/img/Caribbean-beach.jpg');
+	}
     
   </style>
   <!-- Custom styles for this template -->
   <link href="statics/css/cruise.css" rel="stylesheet">
   <link href="statics/css/cruise2.css" rel="stylesheet">
   <script src="statics/js/jquery-3.4.1.min.js"></script>
-
+  <script type="text/javascript" src="statics/js/snowstorm.js"></script>
 </head>
 
-<body>
+<body class="bodybg">
   <div class="d-flex upper-color flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm">
-    <h3 class="my-0 mr-md-auto font-weight-bold "><a class="font-color" href="index.html" style="text-decoration: none">THIRTEEN</a></h3>
+    <h3 class="my-0 mr-md-auto font-weight-bold "><a class="font-color" href="index.html" style="text-decoration: none">THIRTEEN旅遊</a></h3>
     <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-dark" href="member.html">會員清單</a> 
       <a class="p-2 text-dark" href="cruises.html">郵輪行程</a>
@@ -65,7 +67,7 @@
   </div>
   
   <div class="album py-5">
-    <div class="container">
+    <div class="container" style="">
       <div id="product_panel" class="row">
       </div>
     </div>
@@ -164,19 +166,11 @@
         });
       }
     
-    function addform(){
-    	let mid_html = ''; ////加return false讓網頁不refresh，只改變清單內容
-        mid_html += '<option value="'+ data.id +'">'+ data.name +'</option>';
-    	return mid_html;    
-    }
-    
     function addCruise(data) {
     	let inner_html = '';
     	inner_html += '<div id="panel" class="col-md-4 padding-0" > <a style="text-decoration: none" href="status.html?cruiseid='+data.id+'">';
-   		inner_html += '<div class="card-header">';
-   		inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
- 		inner_html += '</div>';
- 		inner_html += '<div class="card mb-4 shadow-sm">';
+   		inner_html += '<div class="card mb-4 shadow-sm" style="padding:5px">';
+ 		inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
  		inner_html += '<img src="statics/img/product/' + data.image + '" width="100%" height="200">';
 		inner_html += '<div class="card-body">';
 		inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ NT</small></h1>';
@@ -259,8 +253,7 @@
         <a href="#">Back to top</a>
       </p>
     	 <p>Thank you for visiting our web site!</p>
-         <p>Contact us: <font color="blue">thirteen.with.u@gmail.com</font> </p>
-    
+         <p>Contact us: <font color="blue"><a href="mailto:thirteen.with.u@gmail.com">thirteen.with.u@gmail.com</a></font> </p>
       </div>
   </footer>
 </body>

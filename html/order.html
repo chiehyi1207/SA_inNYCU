@@ -8,7 +8,7 @@
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Jekyll v3.8.5">
 
-  <title>訂單列表 ｜ THIRTEEN</title>
+  <title>訂單列表 ｜ THIRTEEN旅遊</title>
 
   <!-- Bootstrap core CSS -->
   <link href="statics/css/bootstrap.min.css" rel="stylesheet">
@@ -26,12 +26,14 @@
       -ms-user-select: none;
       user-select: none;
     }
-
+	.bodybg{
+		background-image: url('statics/img/Caribbean-beach.jpg')
+	}
     @media (min-width: 768px) {
       .bd-placeholder-img-lg {
         font-size: 3.5rem;
       }
-     
+    } 
     .upper-color{
     	background-color: #FFDAB9;
     }
@@ -50,26 +52,26 @@
 	.btn{
 		font-size: 20px;
 	}
-    }
   </style>
   <!-- Custom styles for this template -->
   <link href="statics/css/product.css" rel="stylesheet">
   <link href="statics/css/jquery-confirm.css" rel="stylesheet">
-
+  <script type="text/javascript" src="statics/js/snowstorm.js"></script>
   <script src="statics/js/jquery-3.4.1.min.js"></script>
   <script src="statics/js/jquery-confirm.js"></script>
   <script src="statics/js/big.min.js"></script>
   <script type="text/javascript">
     	if (document.cookie.indexOf('memberlogin=valid') < 0) {
-    	  location.href = "login.html"; //If user has not authenticated, sent back to this page
+    		alert("請先登入會員！");
+    		location.href = "login.html"; //If user has not authenticated, sent back to this page
     	}
     	
   </script>
 </head>
 
-<body>
+<body class="bodybg">
   <div class="d-flex upper-color flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm">
-    <h3 class="my-0 mr-md-auto font-weight-bold "><a class="font-color" href="index.html" style="text-decoration: none">THIRTEEN</a></h3>
+    <h3 class="my-0 mr-md-auto font-weight-bold "><a class="font-color" href="index.html" style="text-decoration: none">THIRTEEN旅遊</a></h3>
     <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-dark" href="member.html">會員清單</a> 
       <a class="p-2 text-dark" href="cruises.html">郵輪行程</a>
@@ -117,6 +119,38 @@
   
   getAllOrderData();
   
+  function deleteOrder(id) {  
+      var check = window.confirm("確認刪除訂單？");  //提示彈出
+      if (check == true) {   
+          console.log("You pressed OK!");
+          var request = {'id': id};
+          var data_string = JSON.stringify(request);  //把上一行request轉成JSON
+          $.ajax({   
+              type: "DELETE",
+              url: "api/order.do",  //Ordercontroller的doDelete
+              crossDomain: true,
+              data: data_string,
+              cache: false,
+              dataType: 'json',
+              timeout: 5000,
+              success: function (response) {
+                  if(response.status == 200){
+                      $("#flashMessage").html("成功! 已經成功刪除此筆訂單...");
+                      $("#flashMessage").show();
+                      window.location.reload(true);
+                  }
+                  console.log(response);
+              },
+              error: function () {
+                  alert("無法連線到伺服器！");
+              }
+          });
+      }
+      else {
+          console.log("You pressed Cancel!");
+      }
+  }
+  
   function updateHTML(data) {
 	  var inner_html = '';
 	  var temp = '';
@@ -136,7 +170,8 @@
 		  temp += '<div class="mb-1 text-muted">建立時間：' + value['order_info']['create'] + '</div>';
 		  temp += '<div class="mb-1 text-muted">修改時間：' + value['order_info']['modify'] + '</div>';
 		  temp += '<p class="card-text mb-auto">總價：$ ' + total_price + '</p>';
-		  temp += '<a href="order_detail.html?id=' + value['order_info']['id'] + '" class="stretched-link">詳細資料</a>';
+		  temp += '<a href="order_detail.html?id=' + value['order_info']['id'] + '" >詳細資料</a>';
+		  temp += '<a href="javascript: deleteOrder(' + value['order_info']['id'] + ');">刪除</a></td></tr>';		  
 		  temp += '</div></div></div>';
 		  inner_html = temp + inner_html;
 	  });
@@ -146,17 +181,15 @@
   }
   </script>
 
-  <footer class="text-muted">
+  <footer>
     <div class="container">
       <p class="float-right">
         <a href="#">Back to top</a>
       </p>
-      <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-      <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a
-          href="/docs/4.3/getting-started/introduction/">getting started guide</a>.</p>
-    </div>
+    	 <p>Thank you for visiting our web site!</p>
+         <p>Contact us: <font color="blue"><a href="mailto:thirteen.with.u@gmail.com">thirteen.with.u@gmail.com</a></font> </p>
+      </div>
   </footer>
 </body>
 
 </html>
-

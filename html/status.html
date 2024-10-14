@@ -7,7 +7,7 @@
   <meta name="description" content="">
 
 
-  <title>郵輪行程列表 ｜ THIRTEEN </title>
+  <title>郵輪行程列表 ｜ THIRTEEN旅遊 </title>
 
   <!-- Bootstrap core CSS -->
   <link href="statics/css/bootstrap.min.css" rel="stylesheet">
@@ -64,13 +64,13 @@
   </style>
   <!-- Custom styles for this template -->
   <link href="statics/css/cruise.css" rel="stylesheet">
-
+  <script type="text/javascript" src="statics/js/snowstorm.js"></script>
   <script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
   <div class="d-flex upper-color flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm">
-    <h3 class="my-0 mr-md-auto font-weight-bold "><a class="font-color" href="index.html" style="text-decoration: none">THIRTEEN</a></h3>
+    <h3 class="my-0 mr-md-auto font-weight-bold "><a class="font-color" href="index.html" style="text-decoration: none">THIRTEEN旅遊</a></h3>
     <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-dark" href="member.html">會員清單</a> 
       <a class="p-2 text-dark" href="cruises.html">郵輪行程</a>
@@ -100,19 +100,19 @@
     function getSingleCruise() {
         $.ajax({
           type: "GET",
-          url: "api/cruise.do",  //對應到productcontroller的doGet
+          url: "api/cruise.do",  //對應到cruisescontroller的doGet
           crossDomain: true,
           cache: false,
           data: "id=" + id,
           dataType: 'json',
           timeout: 5000,
-          success: function (response) { //成功得到doGet的response(productcontroller 46行)
+          success: function (response) { //成功得到doGet的response(cruisescontroller 55行)
             if (response.status == 200) {
           	var cr_panel = '';
           	
           	$.each(response.response.data, function (){
           		cr_panel += '<br><a href="index.html">HOME</a> > <a href="cruises.html">郵輪行程目錄</a> > '+this.name+'';
-              	cr_panel += addItem(this); //96定義
+              	cr_panel += addItem(this); //156定義
           	})
           	
           	$("#cruise_panel").append(cr_panel);
@@ -127,19 +127,19 @@
  	function getSingleSpot() {
         $.ajax({
           type: "GET",
-          url: "api/spot.do",  //對應到productcontroller的doGet
+          url: "api/spot.do",  //對應到spotcontroller的doGet
           crossDomain: true,
           cache: false,
           data: "id=" + id,
           dataType: 'json',
           timeout: 5000,
-          success: function (response) { //成功得到doGet的response(productcontroller 46行)
+          success: function (response) { //成功得到doGet的response(spotcontroller 47行)
             if (response.status == 200) {
           	var cr_panel = '';
           	  	
           	$.each(response.response.data, function (){
           		cr_panel += '<br><a href="index.html">HOME</a> > <a href="spots.html">景點目錄</a> > '+this.name+'';
-          		cr_panel += addItem(this); //96定義
+          		cr_panel += addItem(this); //156定義
           	})
           	
           	$("#cruise_panel").append(cr_panel);
@@ -174,10 +174,9 @@
       <p class="float-right">
         <a href="#">Back to top</a>
       </p>
-
-      <p>Thank you for visiting our web site!</p>
-      <p>Contact us: <font color="blue">thirteen.with.u@gmail.com</font> </p>
-    </div>
+    	 <p>Thank you for visiting our web site!</p>
+         <p>Contact us: <font color="blue"><a href="mailto:thirteen.with.u@gmail.com">thirteen.with.u@gmail.com</a></font> </p>
+      </div>
   </footer>
 </body>
 

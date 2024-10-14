@@ -5,7 +5,7 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Edit | THIRTEEN</title>
+    <title>Edit | THIRTEEN旅遊</title>
     <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
     <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
     <link rel="stylesheet" type="text/css" href="statics/css/cake.generic.css">
@@ -35,7 +35,7 @@
   </style>
 <body>
 	<div class="d-flex upper-color flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm">
-    	<h3 class="my-0 mr-md-auto font-weight-bold"><a class="font-color" href="index.html" style="text-decoration: none">THIRTEEN</a></h3>
+    	<h3 class="my-0 mr-md-auto font-weight-bold"><a class="font-color" href="index.html" style="text-decoration: none">THIRTEEN旅遊</a></h3>
     	<nav class="my-2 my-md-0 mr-md-3">
       		<a class="p-2 text-dark" href="member.html">會員清單</a> 
       		<a class="p-2 text-dark" href="cruises.html">郵輪行程</a>
@@ -150,7 +150,6 @@
                                     $('#flashMessage').html(response.message);
                                     $('#flashMessage').show();
                                     if(response.status == 200){
-                                        updateSQLTable(response.response);
                                         window.location.href='member.html';
                                     }
                                 },
@@ -159,24 +158,6 @@
                                 }
                         });
                     }
-                }
-
-                // 更新SQL指令歷史表格
-                function updateSQLTable(data) {
-                    var time = (data.time / 1000000).toFixed(2);
-                    var table_html = "";
-                    
-                    sql_num += 1
-
-                    table_html += '<tr>';
-                    table_html += '<td>' + sql_num + '</td>';
-                    table_html += '<td>' + data.sql + '</td>';
-                    table_html += '<td style="text-align: right">' + '0' + '</td>';
-                    table_html += '<td style="text-align: right">' + data.row + '</td>';
-                    table_html += '<td style="text-align: right">' + data.row + '</td>';
-                    table_html += '</tr>';
-                    $("#sql_log > tbody").append(table_html);
-                    $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
                 }
 
                 function getMember() {
@@ -190,7 +171,6 @@
                         timeout: 5000,
                         success: function (response) {
                             if(response.status == 200){
-                            	updateSQLTable(response.response);
                             	document.getElementById('member_name').value = response['response']['data'][0]['name'];
                             	document.getElementById('member_email').value = response['response']['data'][0]['email'];
                             	document.getElementById('member_password').value = response['response']['data'][0]['password'];
@@ -224,9 +204,15 @@
       
             </script>
         </div>
-        <div id="footer">
-            
-        </div>
+        <footer>
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
+    	 <p>Thank you for visiting our web site!</p>
+         <p>Contact us: <font color="blue"><a href="mailto:thirteen.with.u@gmail.com">thirteen.with.u@gmail.com</a></font> </p>
+      </div>
+  </footer>
     </div>
 </body>
 
